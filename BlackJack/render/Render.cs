@@ -42,6 +42,7 @@ namespace BlackJack.render
             Console.WriteLine(FiggleFonts.Straight.Render(@"CASH: "+d.balance+@" "+@" POT: "+d.pot)+ @"
 =====================================================================================================
 ");
+            //tesr
 
 
 
