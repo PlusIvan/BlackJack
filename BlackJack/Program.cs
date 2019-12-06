@@ -2,46 +2,63 @@
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Console = Colorful.Console;
+
 namespace BlackJack
 {
     class Program
     {
-        public static object Color { get; private set; }
 
-        [DllImport("user32.dll")]
-        public static extern bool ShowWindow(System.IntPtr hWnd, int cmdShow);
+
+
 
         static void Main(string[] args)
         {
-            Process p = Process.GetCurrentProcess();
-            ShowWindow(p.MainWindowHandle, 3);
-            Console.Title = "BlackJack by Ivan Moroz";
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Clear();
-            String text = @"
-                             ___  __   ___  _______ __   _____  _______ __
-                            / _ )/ /  / _ |/ ___/ //_/_ / / _ |/ ___/ //_/
-                           / _  / /__/ __ / /__/ ,< / // / __ / /__/ ,<   
-                          /____/____/_/ |_\___/_/|_|\___/_/ |_\___/_/|_|  
-                                               _____  __
-                                              / _ ) \/ /
-                                             / _  |\  / 
-                                            /____/ /_/  
-                                         _____   _____   _  __
-                                        /  _/ | / / _ | / |/ /
-                                       _/ / | |/ / __ |/    / 
-                                      /___/ |___/_/ |_/_/|_/  
-=====================================================================================================
-";
+            dynamic d = JObject.Parse("{rules:{blackjack:2,dealer_hit:500, surrender:40},dealer:0, pot:0,player:{username:null, balance: 0}}");
+            App app = new App();
+            app.Config(true);
+            Render display = new Render(d);
+            display.Show_Logo(d);
+            display.Display();
+            Console.WriteLine($"Type your Username");
+            while (d.player.username == null)
+            {
+                d.player.username = Console.ReadLine();
+                Console.Title = Console.Title + $" \\/ Welcome {d.player.username}";
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+          
+            }
+            display.Show_Logo(d);
+            display.Display();
+            while (d.player.balance == 0)
+            {
+                Console.WriteLine($"How much would you start with, [100-1000]");
+                int amount = 0;
+                try
+                {
+                    amount = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    display.Show_Logo(d);
+                    display.Display();
+                    Console.WriteLine($"Type a number fuckhead");
+                }
+                d.player.balance = amount;
+            }
+            display.Show_Logo(d);
+            display.Display();
+            // display.Show_Logo(d);
+            //display.Display();
+            //  Console.SetCursorPosition((Console.WindowWidth - test.Length) / 2, Console.CursorTop);
+            //Console.WriteLine(test);
 
-
+            //  Render display = new Render();
+            // display.Display();
+            /*
             Console.ReadKey();
 
-            dynamic d = JObject.Parse("{balance:0, dealer:0, player:0, pot:0}");
-            render.Render display = new render.Render(d);
-            display.Display();
+            dynamic d = JObject.Parse("{dealer:0, pot:0,player:{username:null, balance: 0}}");
+
             Console.WriteLine($"Press any key to begin the game");
             Console.ReadKey();
             Console.WriteLine($"\nDeposit between $100-$1000");
@@ -62,6 +79,10 @@ namespace BlackJack
             display.Display();
             functions.Engine engine = new functions.Engine(d);
             engine.On(); 
+
+            Console.ReadKey();
+            */
+
 
             Console.ReadKey();
         }
