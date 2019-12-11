@@ -100,8 +100,11 @@ namespace BlackJack
             foreach (KeyValuePair<string, int> entry in deck)
             {
                 // do something with entry.Value or entry.Key
+                //Console.WriteLine($"Key: {entry.Key} Value: {entry.Value}");
 
             }
+            //Console.WriteLine($"Deck Length: {deck.Count}"); 52
+
         }
     }
 }
