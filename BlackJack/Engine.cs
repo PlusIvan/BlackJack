@@ -46,33 +46,6 @@ namespace BlackJack
                     d.pot += Convert.ToInt32(number);
                     continue;
                 }
-
-
-                /*  
-
-                    if (b > Convert.ToInt32(d.balance))
-                    {
-                        Console.WriteLine($"\nNot enough cash to waste");
-                        continue;
-                    }
-                    else
-                    {
-                        d.player.balance -= b;
-                        d.pot += b;
-                        display.Display();
-                        continue;
-                    }
-
-
-                }else if (!allow.Contains(a) && a == "done")
-                    {
-                    if (d.pot == 0)
-                        continue;
-
-                        display.Display();
-                        break;
-                    }
-                    }*/
             }
             display.Show_Logo(d);
             display.Display();
@@ -110,16 +83,32 @@ namespace BlackJack
                 deck.Remove(randomKey);
                 keyList.Remove(randomKey);
             }
+            
             //Shuffle done
 
-             foreach (KeyValuePair<string, int> entry in shuffled_deck)
-             {
-                 // do something with entry.Value or entry.Key
-                 Console.WriteLine($"Key: {entry.Key} Value: {entry.Value}");
+            /*  foreach (KeyValuePair<string, int> entry in shuffled_deck)
+              {
+                  // do something with entry.Value or entry.Key
+                  Console.WriteLine($"Key: {entry.Key} Value: {entry.Value}");
 
-             }
-            
-
+              }*/
+            keyList = new List<string>(shuffled_deck.Keys);
+            var player = new Dictionary<string, int>();
+            var dealer = new Dictionary<string, int>();
+            while (player.Count != 2)
+            {
+                string randomKey = keyList[rand.Next(keyList.Count)];
+                player.Add(randomKey, shuffled_deck[randomKey]);
+                shuffled_deck.Remove(randomKey);
+                keyList.Remove(randomKey);
+            }
+            while (dealer.Count != 2)
+            {
+                string randomKey = keyList[rand.Next(keyList.Count)];
+                dealer.Add(randomKey, shuffled_deck[randomKey]);
+                shuffled_deck.Remove(randomKey);
+                keyList.Remove(randomKey);
+            }
         }
     }
 }
