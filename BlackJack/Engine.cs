@@ -10,7 +10,7 @@ namespace BlackJack
     class Engine
     {
         private dynamic d;
-
+        Random rand = new Random();
         public Engine(dynamic d)
         {
             this.d = d;
@@ -79,7 +79,6 @@ namespace BlackJack
             // Console.WriteLine($"\nGame begin?");
             string[] type = { "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2" };
             string[] symbols = { "s", "c", "d", "h" };
-            //shuffle
             var deck = new Dictionary<string, int>();
             while (true)
             {
@@ -97,13 +96,29 @@ namespace BlackJack
                 }
                 break;
             }
-            foreach (KeyValuePair<string, int> entry in deck)
-            {
-                // do something with entry.Value or entry.Key
-                //Console.WriteLine($"Key: {entry.Key} Value: {entry.Value}");
 
-            }
             //Console.WriteLine($"Deck Length: {deck.Count}"); 52
+
+            //Suffle
+            List<string> keyList = new List<string>(deck.Keys);
+            var shuffled_deck = new Dictionary<string, int>();
+            while (deck.Count != 0)
+            {
+                string randomKey = keyList[rand.Next(keyList.Count)];
+                //Console.WriteLine($"Sniff Key: {randomKey} Value: {deck[randomKey]}");
+                shuffled_deck.Add(randomKey, deck[randomKey]);
+                deck.Remove(randomKey);
+                keyList.Remove(randomKey);
+            }
+            //Shuffle done
+
+             foreach (KeyValuePair<string, int> entry in shuffled_deck)
+             {
+                 // do something with entry.Value or entry.Key
+                 Console.WriteLine($"Key: {entry.Key} Value: {entry.Value}");
+
+             }
+            
 
         }
     }
