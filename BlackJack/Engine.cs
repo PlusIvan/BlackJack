@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Figgle;
 using Newtonsoft.Json.Linq;
 
 namespace BlackJack
@@ -109,6 +110,42 @@ namespace BlackJack
                 shuffled_deck.Remove(randomKey);
                 keyList.Remove(randomKey);
             }
+            
+            while (d.pot > 0)
+            {
+                Console.Write($"DEALER: {dealer.First().Key} XX\n");
+                Console.Write($"YOU: {player.First().Key} {player.Last().Key}\n");
+                //Special case for blackjack %
+                if (player.First().Value + player.Last().Value == 21 && dealer.First().Value + dealer.Last().Value < 21)
+                {
+                    Console.Write($"Wow, you win a black jack\n");
+                }
+                else if (player.First().Value + player.Last().Value == 21 && dealer.First().Value + dealer.Last().Value == 21)
+                {
+                    Console.Write($"Wow, you win a black jack but so does the dealer :(\n");
+                }
+                // End of special case
+
+                Console.Write($"Moves [Hit, Surrender, Stand, Double]\n");
+                String[] moves = { "hit", "surrender", "stand", "double"};
+                String move = Console.ReadLine().ToLower();
+                if (!moves.Contains(move))
+                {
+                    display.Show_Logo(d);
+                    display.Display();
+                    continue;
+                }
+                if (move == "surrender")
+                {
+                    //dynamic d = JObject.Parse("{rules:{blackjack:xx,dealer_hit:xx, surrender:xx},dealer:0, pot:0,player:{username:null, balance: 0}}");
+                    d.player.balance += d.rules.surrender*d.pot/100; // += %*pot/100
+                    Console.Write($"You win {d.rules.surrender * d.pot / 100}\n");
+                    Console.ReadKey();
+                    break;
+                }
+
+            }
+
         }
     }
 }
