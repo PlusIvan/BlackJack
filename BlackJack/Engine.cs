@@ -143,7 +143,29 @@ namespace BlackJack
                     Console.ReadKey();
                     break;
                 }
+                if (move == "stand")
+                {
+                    int dealer_pts = dealer.First().Value + dealer.Last().Value;
+                    if (dealer.First().Value + dealer.Last().Value < d.rules.dealer_hit)
+                    {
+                        //Dealer bellow, must hit
+                        while (dealer_pts < d.rules.dealer_hit)
+                        {
+                            string randomKey = keyList[rand.Next(keyList.Count)];
+                            dealer.Add(randomKey, shuffled_deck[randomKey]);
+                            shuffled_deck.Remove(randomKey);
+                            keyList.Remove(randomKey);
+                            dealer_pts += shuffled_deck[randomKey];
+                            if (dealer_pts > 21 && dealer.Values.Contains(11)) //Dealer hit over 21 yet to convert ACE to 1
+                            {
+                                while (dealer.Values.Contains(11))
+                                {
 
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
         }
