@@ -84,7 +84,7 @@ namespace BlackJack
         }
         public void Log(String symbol, String text, String color)
         {
-
+            Console.Write($"[{symbol}] {text}");
         }
     }
 }
