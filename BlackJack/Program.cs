@@ -14,7 +14,7 @@ namespace BlackJack
             Engine engine = new Engine(d);
             display.Show_Logo(d);
             display.Display();
-            Console.WriteLine($"Type your Username");
+            Console.Write($"[?] Type your Username\n");
             while (d.player.username == null)
             {
                 d.player.username = Console.ReadLine().ToUpper();

@@ -82,5 +82,9 @@ namespace BlackJack
                 Console.Write("#");
             }
         }
+        public void Log(String symbol, String text, String color)
+        {
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 
 namespace BlackJack
 {
@@ -52,6 +53,10 @@ namespace BlackJack
                 }
                 d.player.balance -= d.pot;
                 //Form deck
+               /* SoundPlayer sound = new SoundPlayer();
+                sound.SoundLocation = "sounds\\card_flip.mp3";
+                sound.Play();
+                */
                 foreach (string card in cards)
                 {
                     foreach (string suit in suits)
