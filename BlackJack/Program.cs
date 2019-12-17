@@ -13,7 +13,7 @@ namespace BlackJack
 
         static void Main(string[] args)
         {
-            dynamic d = JObject.Parse("{rules:{blackjack:2,dealer_hit:16, surrender:40},dealer:0, pot:0,player:{username:null, balance: 0}}");
+            dynamic d = JObject.Parse("{rules:{blackjack:2,dealer_hit:16, surrender:50},dealer:0, pot:0,player:{username:null, balance: 0}}");
             App app = new App();
             app.Config(true);
             Render display = new Render(d);
@@ -49,10 +49,11 @@ namespace BlackJack
                 {
                     display.Show_Logo(d);
                     display.Display();
+                    continue;
                 }
                 d.player.balance = amount;
             }
-            engine.On();
+            engine.engineOn();
 
 
             // display.Show_Logo(d);
