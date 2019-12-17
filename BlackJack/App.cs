@@ -24,8 +24,6 @@ namespace BlackJack
             Console.ForegroundColor = ConsoleColor.Yellow;
             if (clear == true)
                 Console.Clear();
-
-
         }
 
 

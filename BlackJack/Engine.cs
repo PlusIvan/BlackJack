@@ -38,7 +38,7 @@ namespace BlackJack
                     Console.ReadKey();
                     break;
                 }
-                Console.Write($"Score: {d.player.balance}\nBet Amount?\n");
+                Console.Write($"Bet Amount?\n");
                 try
                 {
                     d.pot = Convert.ToInt32(Console.ReadLine());
@@ -126,11 +126,7 @@ namespace BlackJack
                         dealer_pts += entry.Value;
                         dealer_cards += " " + entry.Key;
                     }
-                    Console.Write($"Bet: {d.pot}\nDealer:\t{dealer.First().Key}\t??\t[{dealer.First().Value}]\n");
-                    Console.Write($"Player:\t{player_cards}\t[{player_pts}]\n");
-                    Console.Write($"=====================================\n");
-                    Console.Write($"[surrender, hit, double, stand]\n");
-                    Console.Write($"=====================================\n");
+                    display.Table_Cards(dealer.First().Key, dealer.First().Value, player_cards, player_pts);
                     String op = "";
                     if (player_pts == 21)
                     {

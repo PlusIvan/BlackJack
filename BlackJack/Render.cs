@@ -71,5 +71,21 @@ namespace BlackJack
                 Console.Write("=");
             }
         }
+        //dealer.First().Key, dealer.First().Value, player_cards, player_pts
+        public void Table_Cards(String dealer_1st_card, int dealer_1st_value, String player_cards, int player_pts)
+        {
+            Console.Write($"(Dealer): {dealer_1st_card} XX, Value [{dealer_1st_value}]\n");
+            Console.Write($"({d.player.username}): {player_cards}, Value [{player_pts}]\n");
+            Console.Write($"" +
+                $"> stand\n" +
+                $"> hit\n" +
+                $"> double\n" +
+                $"> surrender\n" +
+                $"\n");
+            for (var x = 0; x < Console.WindowWidth; x++)
+            {
+                Console.Write("#");
+            }
+        }
     }
 }
