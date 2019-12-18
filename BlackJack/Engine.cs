@@ -52,11 +52,6 @@ namespace BlackJack
                     continue;
                 }
                 d.player.balance -= d.pot;
-                //Form deck
-               /* SoundPlayer sound = new SoundPlayer();
-                sound.SoundLocation = "sounds\\card_flip.mp3";
-                sound.Play();
-                */
                 foreach (string card in cards)
                 {
                     foreach (string suit in suits)
@@ -140,9 +135,9 @@ namespace BlackJack
                     {
                         continue;
                     }
-                    if (op == "double" && d.pot * 2 > d.player.balance)
+                    if (op == "double" && d.pot > d.player.balance)
                     {
-                        Console.Write($"[X] Can not double, insuficient d.player.balance\n");
+                        Console.Write($"[X] Can not double, insuficient balance\n");
                         Console.ReadKey();
                         continue;
                     }
@@ -176,15 +171,15 @@ namespace BlackJack
 
                         if (op == "double")
                         {
-                            d.pot *= 2;
-                            d.player.balance -= d.pot * 2;
+                            d.pot += d.pot;
+                            d.player.balance -= d.pot;
                             string randomKey = keyList[rand.Next(keyList.Count)];
                             player.Add(randomKey, deck[randomKey]);
                             player_cards += " " + randomKey;
                             player_pts += deck[randomKey];
                             deck.Remove(randomKey);
                             keyList.Remove(randomKey);
-                            Console.Write($"[+] You double down {d.pot * 2} with a {randomKey} [{player_pts}]\n");
+                            Console.Write($"[+] You double down {d.pot} with a {randomKey} [{player_pts}]\n");
                             if (player_pts > 21)
                             {
                                 Console.Write($"[X] Busted\n");

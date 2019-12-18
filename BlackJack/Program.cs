@@ -15,12 +15,12 @@ namespace BlackJack
             display.Show_Logo(d);
             display.Display();
             Console.Write($"[?] Type your Username\n");
-            while (d.player.username == null)
+            while (d.player.username == null || d.player.username == "")
             {
                 d.player.username = Console.ReadLine().ToUpper();
-                Console.Title = Console.Title + $" \\/ Welcome {d.player.username}";
-                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
             }
+            Console.Title = Console.Title + $" \\/ Welcome {d.player.username}";
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
             display.Show_Logo(d);
             display.Display();
             while (d.player.balance == 0)
